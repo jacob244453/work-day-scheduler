@@ -78,3 +78,49 @@ function deleteEvent() {
   closeModal();
 }
 
+
+/////////////////////////openModal Function
+function openModal(date) {
+  clicked = date;
+  const eventForDay = events.find(e => e.date === clicked);
+  if (eventForDay) {
+    document.getElementById('eventText').innerText = eventForDay.title;
+    deleteEventModal.style.display = 'block';
+  } else {
+    newEventModal.style.display = 'block';
+  }
+  backDrop.style.display = 'block';
+}
+
+
+/////////////////////////closeModal function
+function closeModal() {
+  eventTitleInput.classList.remove('error');
+  newEventModal.style.display = 'none';
+  deleteEventModal.style.display = 'none';
+  backDrop.style.display = 'none';
+  eventTitleInput.value = '';
+  clicked = null;
+  load();
+}
+
+/////////////////////////initButtons Function
+function initButtons() {
+document.getElementById('nextButton').addEventListener('click', () => {
+  nav++;
+  load();
+});
+document.getElementById('backButton').addEventListener('click', () => {
+  nav--;
+  load();
+});
+document.getElementById('saveButton').addEventListener('click', saveEvent);
+document.getElementById('cancelButton').addEventListener('click', closeModal);
+document.getElementById('deleteButton').addEventListener('click', deleteEvent);
+document.getElementById('closeButton').addEventListener('click', closeModal);
+}
+
+initButtons();
+load();
+
+
